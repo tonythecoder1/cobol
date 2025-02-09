@@ -1,0 +1,90 @@
+IDENTIFICATION DIVISION. 
+PROGRAM-ID. TESTE.
+
+ENVIRONMENT DIVISION.
+INPUT-OUTPUT SECTION.
+FILE-CONTROL.
+    SELECT FICHEIRO ASSIGN TO 
+    "/Users/antonyferreira/Documents/Cobol/project/dados.txt"
+        ORGANIZATION IS INDEXED 
+        ACCESS MODE IS RANDOM 
+        RECORD KEY IS ID-FICHEIRO
+        FILE STATUS IS WS-ESTADO-FICHEIRO.
+
+DATA DIVISION.
+
+FILE SECTION.
+
+    FD FICHEIRO.
+    01 REGISTO-FICHEIRO.
+        05 ID-FICHEIRO PIC 9(02).
+        05 NOME-FICHEIRO PIC X(20).
+
+WORKING-STORAGE SECTION.
+
+    01 WS-INFO-REGISTO PIC X(22) VALUE SPACES.
+    
+    01 FILLER REDEFINES WS-INFO-REGISTO.   
+        05 WS-NOME PIC X(20).
+        05 WS-ID PIC 9(02).
+
+    01 WS-ESTADO-FICHEIRO PIC X(02).
+        88 WS-STATUS-OK VALUE '00'.
+        88 WS-FICHEIRO-NOVO VALUE '35'.
+
+    01 WS-EXIT PIC X(02) VALUE 'N'.
+        88 EXIT-VAR VALUE 'S'.
+
+PROCEDURE DIVISION.
+
+    OPEN I-O FICHEIRO. 
+
+    IF WS-ESTADO-FICHEIRO = '35' THEN
+        DISPLAY "FICHEIRO nao existente, foi criado"
+        OPEN OUTPUT FICHEIRO
+    END-IF.
+
+    IF NOT WS-STATUS-OK THEN 
+        DISPLAY "Erro ao abrir o ficheiro"
+        CLOSE FICHEIRO
+        STOP RUN
+    END-IF.
+
+    PERFORM P300-REGISTO UNTIL EXIT-VAR.
+
+P300-REGISTO.
+
+    DISPLAY '***Insercao de ficheiro***'.
+    DISPLAY 'Insira o nome'.
+    ACCEPT WS-NOME.
+    DISPLAY 'Insere o numero unico'.
+    ACCEPT WS-ID.
+
+    MOVE WS-NOME TO NOME-FICHEIRO.
+    MOVE WS-ID TO ID-FICHEIRO.
+
+    WRITE REGISTO-FICHEIRO
+        INVALID KEY 
+            DISPLAY "Ja esta registado - duplicado"
+        NOT INVALID KEY 
+            DISPLAY "Registo efetuado com sucesso"
+    END-WRITE.
+
+    DISPLAY "DESEJA ADICIONAR MAIS ? - S - SIM"
+    ACCEPT WS-EXIT.
+
+    IF WS-EXIT = "s" OR WS-EXIT = "S" THEN 
+        CONTINUE
+    ELSE 
+        CLOSE FICHEIRO
+    END-IF.
+
+    STOP RUN.   
+
+P300-FIM.
+
+       STOP RUN.
+
+       P300-CARREGAR.
+
+          

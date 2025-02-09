@@ -1,0 +1,32 @@
+IDENTIFICATION DIVISION.
+PROGRAM-ID. AULA6.
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+       
+       01 WS-ENDRECO.
+           03 WS-RUA PIC X(30).
+           03 WS-BAIRRO PIC X(30).
+           03 WS-CIDADE PIC X(30).
+       
+       77 WS-CUMPRIMENTO PIC 9(02).
+
+       
+       PROCEDURE DIVISION.
+
+       MAIN-PROCEDURE.
+
+       COMPUTE WS-CUMPRIMENTO = FUNCTION LENGTH(WS-ENDRECO).
+       
+       DISPLAY "O tamanho do endereço é de " LENGTH OF WS-ENDRECO.
+
+       DISPLAY "O tamanho é de " FUNCTION LENGTH(WS-ENDRECO).
+
+       DISPLAY "É de " WS-CUMPRIMENTO.
+
+       
+       STOP RUN.
+       END PROGRAM AULA6.
+
+
+
+

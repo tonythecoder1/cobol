@@ -1,0 +1,12 @@
+{
+  "ip": "87.196.82.88",
+  "hostname": "87-196-82-88.net.novis.pt",
+  "city": "Porto",
+  "region": "Porto",
+  "country": "PT",
+  "loc": "41.1496,-8.6110",
+  "org": "AS2860 NOS COMUNICACOES, S.A.",
+  "postal": "4000-000",
+  "timezone": "Europe/Lisbon",
+  "readme": "https://ipinfo.io/missingauth"
+}

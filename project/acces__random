@@ -1,0 +1,20 @@
+ 01  WS-CURRENT-ID     PIC 9(02) VALUE 1.
+
+       P200-VER-VOOS.
+
+           OPEN I-O VOOSINPUT.
+
+           PERFORM UNTIL WS-EXIT-OK = "S" OR WS-EXIT-OK = "s"
+               MOVE WS-CURRENT-ID TO VOOSINPUT-ID
+               READ VOOSINPUT
+                   INVALID KEY
+                       DISPLAY "FICHEIRO CHEGOU AO FIM"
+                       SET WS-EXIT-OK TO "S"
+                   NOT INVALID KEY
+                       DISPLAY "VOO N - " VOOSINPUT-ID " NOME DE VOO " 
+                                               VOOSINPUT-NOME
+                       ADD 1 TO WS-CURRENT-ID
+               END-READ
+           END-PERFORM.
+
+           CLOSE VOOSINPUT.

@@ -1,0 +1,4 @@
+FD  CONTACTOS.
+01  REG-CONTACTOS.
+    05  ID-CONTACTO         PIC 9(5).
+    05  NM-CONTACTO         PIC X(30).

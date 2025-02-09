@@ -1,0 +1,3 @@
+Olá, este é um teste de leitura de arquivo.
+Segunda linha de texto.
+Terceira linha, tudo funcionando bem!
